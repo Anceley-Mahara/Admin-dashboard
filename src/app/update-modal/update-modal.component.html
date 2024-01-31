@@ -1,0 +1,18 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Diarise Application</h4>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="approved">Reason to Diarise</label>
+          <input type="text" class="form-control" id="reason" [(ngModel)]="reason">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel')">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="updateApproved()">Update</button>
+    </div>
+  </ng-template>
+  

@@ -1,0 +1,8 @@
+{
+    "/applications": {
+      "target": "https://applications-nej9.onrender.com",
+      "secure": false,
+      "changeOrigin": true
+    }
+  }
+  

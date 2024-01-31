@@ -1,0 +1,192 @@
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Application Detail</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive" *ngIf="application">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Item
+                </th>
+                <th>
+                  Details
+                </th>
+              </thead>
+              <tbody>
+                <tr>
+                    <td>Name</td>
+                  <td>{{ application.name ? application.name : 'Name not available' }}, {{ application.surname }}</td>
+                </tr>
+                <tr>
+                    <td>Date of Birth</td>
+                    <td>{{ application.dateOfBirth }}</td>
+                </tr>
+                <tr>
+                    <td>Sex</td>
+                    <td>{{application.sex}}</td>
+                </tr>
+                <tr>
+                    <td>Passport Number</td>
+                    <td>{{application.passportNumber}}</td>
+                </tr>
+                  <tr>
+                    <td>Passport Issue and Expiry Date</td>
+                    <td>Issued on: {{application.passportIssueDate}} | Expiring on: {{application.passportExpiryDate}}</td>
+                  </tr>
+                  <tr>
+                    <td>Nationality</td>
+                    <td>{{application.nationality}}</td>
+                  </tr>
+                  <tr>
+                    <td>Institution</td>
+                    <td>{{application.institution}} | {{application.course}} | Year: {{application.studyYear}} | Duration: {{application.duration}} </td>
+                  </tr>
+                  <tr>
+                    <td>Contact</td>
+                    <td>{{application.email}} | {{application.phone}}</td>
+                  </tr>
+                  <tr>
+                    <td>Address</td>
+                    <td>Postal: {{application.postalAddress}} | Residential: {{application.residentialAddress}}</td>
+                  </tr>
+                  <tr>
+                    <td>Application Status</td>
+                    <td>Status: {{ application.status }} | Approved: {{ application.approved }}</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="card-title">Attachments</p>
+          <div class="table-responsive">
+            <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    Document
+                  </th>
+                  <th>
+                    Action
+                  </th>
+                  <th>Download</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Proof of Academic registration</td>
+                    <td *ngIf="application.registrationProofFilePath">
+                      <button><a href="{{ getAttachmentUrl(application.registrationProofFilePath) }}" target="_blank">View</a></button>
+                    </td>
+                      <td><button>Download</button>
+                    </td>
+                  </tr>
+                  <tr>
+                      <td>Passport</td>
+                      <td *ngIf="application.passportFilePath">
+                        <button><a href="{{ getAttachmentUrl(application.passportFilePath) }}" target="_blank">View</a></button>
+                      </td>
+                      <td><button>Download</button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Proof of Residence</td>
+                    <td *ngIf="application.residenceProofFilePath">
+                      <button><a href="{{ getAttachmentUrl(application.residenceProofFilePath) }}" target="_blank">View</a></button>
+                    </td>
+                    <td><button>Download</button>
+                  </td>
+                </tr>
+
+                <tr>
+                    <td>Police Clearance Namibia </td>
+                    <td *ngIf="application.criminalRecordNamibiaFilePath">
+                      <button><a href="{{ getAttachmentUrl(application.criminalRecordNamibiaFilePath) }}" target="_blank">View</a></button>
+                    </td>
+                    <td><button>Download</button>
+                  </td>
+                </tr>
+
+                <tr *ngIf="application.applicationType === 'New Application'">
+                    <td>Police Clearance Country of Origin </td>
+                    <td *ngIf="application.criminalRecordOriginFilePath">
+                      <button><a href="{{ getAttachmentUrl(application.criminalRecordOriginFilePath) }}" target="_blank">View</a></button>
+                    </td>
+                    <td><button>Download</button>
+                    </td>
+                </tr>
+                <tr *ngIf="application.applicationType === 'Renewal'">
+                  <td> Academic Record </td>
+                  <td *ngIf="application.academicRecordFilePath">
+                    <button><a href="{{ getAttachmentUrl(application.academicRecordFilePath) }}" target="_blank">View</a></button></td>
+                  <td><button>Download</button>
+                  </td>
+              </tr>
+            </tbody>
+        </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="card-title">Diarise Application</h6>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label for="approved">Reason to Diarise</label>
+                  <select id="status" name="status" class="form-control" required [(ngModel)]="reason">
+                    <option value="Unclear Documents">Unclear Documents</option>
+                    <option value="Uncertified Documents">Uncertified Documents</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 px-1">
+                <div class="form-group">
+                  <label for="approved">Application Status</label>
+                  <select id="status" name="status" class="form-control" required [(ngModel)]="status">
+                    <option value="Resubmit">Resubmit</option>
+                    <!-- <option value="">Female</option> -->
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="update ml-auto mr-auto">
+                  <button class="btn btn-primary btn-round" (click)="diariseApplication()">Diarise Application</button>
+              </div>
+            </div>
+            </div >
+          </form>
+
+        </div>
+      </div>
+      </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h6 class="card-title">Continue with Application</h6>
+            </div>
+            <div class="card-body">
+              <div class="col-md-4 pr-1">
+                <div class="update ml-auto mr-auto">
+                  <div class="loading-circle" *ngIf="isLoading">
+                      <img src="../../../assets/img/Spinner-2.gif" />
+                    </div>
+                  <button class="btn btn-primary btn-round" (click)="updateApplication()">Send to Institution Verification</button>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+          </div>
+          </div>
+

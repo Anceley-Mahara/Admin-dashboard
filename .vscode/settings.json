@@ -1,0 +1,15 @@
+{
+    "cSpell.words": [
+        "Diarised",
+        "fixedplugin",
+        "frontoffice",
+        "lastname",
+        "superadministrator"
+    ],
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/e1531478-4d80-4bb2-b0dc-47b5e8fc897c/resourceGroups/azure-studyvisa-system/providers/Microsoft.Web/sites/admin-online-application",
+    "appService.deploySubpath": "dist"
+}

@@ -1,0 +1,99 @@
+<div class="container">
+<div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header author">
+        <div class="card-title">ADMIN LOGIN</div>
+    </div>
+      <div class="card-body">
+      <div class="author">
+      <img
+        id="profile-img"
+        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+        class="profile-img-card"
+      />
+      </div>
+      <form class="center"
+        *ngIf="!isLoggedIn"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="form-group small-input">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            name="email"
+            [(ngModel)]="form.email"
+            required
+            #email="ngModel"
+          />
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && email.invalid"
+          >
+            Email is required!
+          </div>
+        </div>
+        <div class="form-group small-input">
+            <label for="role">Role</label>
+            <select id="role" name="role" class="form-control" required [(ngModel)]="form.role" required  #role="ngModel">
+                <option value="frontoffice">Front Office</option>
+                <option value="backoffice">Back Office</option> 
+                <option value="superadministrator">Super Administrator</option> 
+              </select>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="f.submitted && role.invalid"
+            >
+              Role is required!
+            </div>
+          </div>
+        <div class="form-group small-input">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel"
+          />
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && password.invalid"
+          >
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">
+              Password must be at least 6 characters
+            </div>
+          </div>
+        </div>
+        <div class="form-group small-input">
+          <button class="btn btn-primary btn-block">
+            Login
+          </button>
+          <small>Get Registered here<button (click)="register()">Access</button></small>
+        </div>
+        <div class="form-group small-input">
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && isLoginFailed"
+          >
+            Login failed: {{ errorMessage }}
+          </div>
+        </div>
+        <div class="loading-circle small-input" *ngIf="isLoading">
+          <img src="../../../assets/img/Spinner-2.gif" />
+        </div>
+      </form>
+    </div>
+    </div>
+  </div>
+</div>
